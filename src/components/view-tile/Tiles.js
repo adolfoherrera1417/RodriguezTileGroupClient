@@ -21,28 +21,37 @@ class Tiles extends Component {
     this.state = {
       tiles: []
     }
+
   }
 
   componentDidMount() {
-    axios.get('tiles').then(res => {
+    axios.get('/api/tiles').then(res => {
       this.setState({
         tiles: res.data
       })
     }).catch(err => {
       console.log(err)
     }).then((res) => {
-      console.log(this.state)
+      console.log(res)
     })
   }
 
-  renderTilesList = () => {
-    return(this.state.tiles.map((tile,id)=>{
-      return <Tile tile={tile} key={id}/>
-    }))
+  renderTilesList() {
+  
+    try{
+      return(this.state.tiles.map((tile,id)=>{
+        return <Tile tileThing={tile} key={id}/>
+      }))
+    } catch(e) {
+      console.log(e)
+    }
+      
   }
 
   render() {
+
     return (
+
       <div className="Home">
 
         <div className="App container">

@@ -32,7 +32,7 @@ export class NavBar extends Component {
     event.preventDefault()
     const jwt = getJWT()
     console.log(jwt)
-    axios.post('users/logout', {}, { headers: { Authorization: 'Bearer ' + jwt } }).then((res) => {
+    axios.post('/api/users/logout', {}, { headers: { Authorization: 'Bearer ' + jwt } }).then((res) => {
       localStorage.removeItem('cool-jwt')
       this.props.history.push('/Login')
     }).catch(error => {
