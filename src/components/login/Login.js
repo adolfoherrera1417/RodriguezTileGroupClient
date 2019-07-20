@@ -39,14 +39,13 @@ class Login extends Component {
 
     handleSubmit(event){
         event.preventDefault()
-        axios.post('/api/users/login', {
+        axios.post(process.env.REACT_APP_API_URI+'/api/users/login', {
             "username": this.state.username,
             "password": this.state.password
         }).then((res) => {
             localStorage.setItem('cool-jwt',res.data.token)
             this.props.history.push('/')
         }).catch((error) => {
-            console.log(error.response.data.error)
             this.setState({
                 error: error.response.data.error
             })

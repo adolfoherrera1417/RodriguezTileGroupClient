@@ -25,7 +25,7 @@ class Tiles extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api/tiles').then(res => {
+    axios.get(process.env.REACT_APP_API_URI+'/api/tiles').then(res => {
       this.setState({
         tiles: res.data
       })

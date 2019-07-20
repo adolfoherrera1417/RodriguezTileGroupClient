@@ -77,7 +77,6 @@ class AddTileForm extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefault()
         const data = new FormData()
         data.append('avatar',this.state.selectedFile)
         
@@ -87,7 +86,7 @@ class AddTileForm extends Component {
 
         console.log(this.state)
         //TODO: put a try catch around axios 
-        axios.post('/api/tiles',data,{
+        axios.post(process.env.REACT_APP_API_URI+'/api/tiles',data,{
             headers: {
                 'Content-Type':'multipart/form-data'
             }
