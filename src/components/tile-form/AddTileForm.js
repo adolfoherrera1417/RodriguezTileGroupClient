@@ -16,6 +16,7 @@ import axios from 'axios'
 import { Button, Form, Row, Col } from 'react-bootstrap';
 import './AddTileForm.css'
 import FileUpload from './FileUpload'
+import Progress from './Progress'
 
 class AddTileForm extends Component {
     constructor(props){
@@ -29,9 +30,13 @@ class AddTileForm extends Component {
             finish: [],
             properties: [],
             selectedFileName: 'Upload Photo',
-            selectedFile: null
+            selectedFile: null,
+            length: 0,
+            width: 0,
+            setUploadPercentage: 0,
         }
 
+        this.baseState = this.state
         this.handleSizeChange = this.handleSizeChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleTypeChange = this.handleTypeChange.bind(this)
@@ -52,9 +57,7 @@ class AddTileForm extends Component {
         this.setState( prevState => ({
             ...prevState,
             [name]: newSelectionArray
-        }),() => {
-            console.log(this.state[name])
-        }) 
+        })) 
     }
 
     handleTypeChange(event) {
@@ -77,6 +80,8 @@ class AddTileForm extends Component {
     }
 
     handleSubmit(event) {
+        event.preventDefault()
+
         const data = new FormData()
         data.append('avatar',this.state.selectedFile)
         
@@ -84,22 +89,29 @@ class AddTileForm extends Component {
 
         data.append('state',JSON.stringify(this.state))
 
-        console.log(this.state)
         //TODO: put a try catch around axios 
         axios.post(process.env.REACT_APP_API_URI+'/api/tiles',data,{
             headers: {
                 'Content-Type':'multipart/form-data'
+            },
+            onUploadProgress: progressEvent => {
+                this.setState({
+                    setUploadPercentage: (parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)))
+                })
             }
         }).then(res => {
-             console.log(res)
+            document.getElementById('create-tile-form').reset();
+            this.setState(this.baseState)
         })
+
+
     }
 
     render() {
         return(
             <div className='add' >
 
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit} id='create-tile-form'>
                     <Form.Group>
                         <Form.Label>Tile name</Form.Label>
                         <Form.Control autoFocus placeholder='Enter name of tile' onChange={this.handleTypeChange} name='name'/>
@@ -189,7 +201,7 @@ class AddTileForm extends Component {
                     </Form.Group>
 
                     <FileUpload controlFunc={this.handlePhotoChange} fileName={this.state.selectedFileName}/>
-
+                    <Progress percentage={this.state.setUploadPercentage}/>
                     <Button variant='primary' type='submit'>
                         Add
                     </Button>
