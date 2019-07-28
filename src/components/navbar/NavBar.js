@@ -31,7 +31,7 @@ export class NavBar extends Component {
   handleLogout(event) {
     event.preventDefault()
     const jwt = getJWT()
-    axios.post(process.env.REACT_APP_API_URI+'/api/users/logout', {}, { headers: { Authorization: 'Bearer ' + jwt } }).then((res) => {
+    axios.post('/api/users/logout', {}, { headers: { Authorization: 'Bearer ' + jwt } }).then((res) => {
       localStorage.removeItem('cool-jwt')
       this.props.history.push('/Login')
     }).catch(error => {

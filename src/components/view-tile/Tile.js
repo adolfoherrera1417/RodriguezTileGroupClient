@@ -38,7 +38,7 @@ class Tile extends Component {
             <div className='col-auto md-4'>
             <Card style={{marginTop: 10, marginBottom:10, width:"10rem"}} >
                 
-                <Card.Img className="img-fluid" variant="top" src={process.env.REACT_APP_API_URI+'/api/tiles/'+ this.state._id + '/avatar'}/>
+                <Card.Img className="img-fluid" variant="top" src={'/api/tiles/'+ this.state._id + '/avatar'}/>
         
                 <Card.Body>
                     <Card.Title>{this.state.name}</Card.Title>

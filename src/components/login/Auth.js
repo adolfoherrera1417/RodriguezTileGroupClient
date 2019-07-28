@@ -26,8 +26,9 @@ class Auth extends Component {
         const jwt = getJWT()
         if (!jwt) {
             this.props.history.push('/Login')
+            return
         }
-        axios.get(process.env.REACT_APP_API_URI+'/api/users',{headers: {Authorization: 'Bearer '+ jwt }}).then((res) => {
+        axios.get('/api/users',{headers: {Authorization: 'Bearer '+ jwt }}).then((res) => {
             this.setState({
                 user: res.data
             })
