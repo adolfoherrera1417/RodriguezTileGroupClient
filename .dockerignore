@@ -1,0 +1,16 @@
+# npm extras
+node_modules
+
+# enviornment variables
+.env.development
+.env.production
+
+# production
+build
+
+# dockerfiles
+dockerfile
+
+#git extras
+.gitignore
+README.md
