@@ -1,8 +1,8 @@
 /* 
-    Name: AddTileForm.js
+    Name: Tiles.js
     Created by: Adolfo Herrera
     Created on: July 6, 2019
-    Last Updated: July 17, 2019
+    Last Updated: July 27, 2019
     Purpose: Main Component used to render all the tiles.
 */
 
@@ -25,14 +25,12 @@ class Tiles extends Component {
   }
 
   componentDidMount() {
-    axios.get(process.env.REACT_APP_API_URI+'/api/tiles').then(res => {
+    axios.get('/api/tiles').then(res => {
       this.setState({
         tiles: res.data
       })
     }).catch(err => {
       console.log(err)
-    }).then((res) => {
-      console.log(res)
     })
   }
 

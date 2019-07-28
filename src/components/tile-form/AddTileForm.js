@@ -90,7 +90,7 @@ class AddTileForm extends Component {
         data.append('state',JSON.stringify(this.state))
 
         //TODO: put a try catch around axios 
-        axios.post(process.env.REACT_APP_API_URI+'/api/tiles',data,{
+        axios.post('/api/tiles',data,{
             headers: {
                 'Content-Type':'multipart/form-data'
             },

@@ -39,7 +39,7 @@ class Login extends Component {
 
     handleSubmit(event){
         event.preventDefault()
-        axios.post(process.env.REACT_APP_API_URI+'/api/users/login', {
+        axios.post('/api/users/login', {
             "username": this.state.username,
             "password": this.state.password
         }).then((res) => {
