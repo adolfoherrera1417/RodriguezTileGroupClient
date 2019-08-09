@@ -10,6 +10,7 @@
 
 import React, { Component } from 'react'
 import {Card} from 'react-bootstrap'
+import axios from 'axios';
 
 class Tile extends Component {
     
@@ -23,7 +24,8 @@ class Tile extends Component {
             placement: [],
             finish: [],
             properties: [],
-            _id: ''
+            _id: '',
+        
         }
     }
 

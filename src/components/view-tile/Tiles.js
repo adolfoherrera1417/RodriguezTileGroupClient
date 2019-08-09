@@ -12,6 +12,7 @@ import Navbar from '../navbar/NavBar'
 import axios from 'axios'
 import Tile from './Tile'
 import {CardDeck} from 'react-bootstrap'
+import {_arrayBufferToBase64} from '../../helpers/convert'
 
 class Tiles extends Component {
 
@@ -32,6 +33,20 @@ class Tiles extends Component {
     }).catch(err => {
       console.log(err)
     })
+
+    // axios.get('/api/tiles/5d4dd5ac521a21046c136516/gallery').then( res => {
+    //   const base64Flag = 'data:image/jpeg;base64,';
+    
+    //   const imageStr = _arrayBufferToBase64(res.data[0].data);
+
+    //   this.setState({
+    //     img: base64Flag + imageStr
+    //   })
+    // }).finally(res => {
+    //   //console.log(this.state.tileImg)
+    // }
+    // )
+
   }
 
   renderTilesList() {
@@ -64,7 +79,7 @@ class Tiles extends Component {
           </CardDeck>
           
         </div>
-
+        {/* <img src={this.state.img}/> */}
         
       </div>
     )
