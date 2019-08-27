@@ -18,7 +18,7 @@ const divStyle = {
 const FileUpload = (props) => {
     return (
         <div className='custom-file' style={divStyle}>
-            <input type = 'file' className='custom-file-input' id='customFile' onChange={props.controlFunc}/>
+            <input type = 'file' className='custom-file-input' id='customFile' multiple onChange={props.controlFunc}/>
             <label className='custom-file-label' htmlFor='customFile'>
                 {props.fileName}
             </label>

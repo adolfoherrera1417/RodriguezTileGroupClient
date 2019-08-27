@@ -29,8 +29,8 @@ class AddTileForm extends Component {
             placement: [],
             finish: [],
             properties: [],
-            selectedFileName: 'Upload Photo',
-            selectedFile: null,
+            selectedFileName: '',
+            selectedFile: [],
             length: 0,
             width: 0,
             setUploadPercentage: 0,
@@ -67,9 +67,12 @@ class AddTileForm extends Component {
     }
 
     handlePhotoChange(event) {
+        const fileName = this.state.selectedFileName.concat(event.target.files[0].name)
         this.setState({
-            selectedFile: event.target.files[0],
-            selectedFileName: event.target.files[0].name
+            selectedFile: [...this.state.selectedFile, event.target.files[0]],
+            selectedFileName: fileName
+        }, (res) => {
+            console.log(this.state.selectedFile)
         })
     }
 
@@ -83,7 +86,11 @@ class AddTileForm extends Component {
         event.preventDefault()
 
         const data = new FormData()
-        data.append('avatar',this.state.selectedFile)
+        data.append('avatar',this.state.selectedFile[0])
+
+        for (let i = 1; i < this.state.selectedFile.length; i++) {
+            data.append('gallery',this.state.selectedFile[i])
+        }
         
         JSON.stringify(this.state)
 
@@ -200,7 +207,10 @@ class AddTileForm extends Component {
 
                     </Form.Group>
 
+
                     <FileUpload controlFunc={this.handlePhotoChange} fileName={this.state.selectedFileName}/>
+
+
                     <Progress percentage={this.state.setUploadPercentage}/>
                     <Button variant='primary' type='submit'>
                         Add

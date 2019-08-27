@@ -19,9 +19,8 @@ class Tiles extends Component {
     super(props)
 
     this.state = {
-      tiles: []
+      tiles: [],
     }
-
   }
 
   componentDidMount() {
@@ -64,8 +63,6 @@ class Tiles extends Component {
           </CardDeck>
           
         </div>
-
-        
       </div>
     )
   }
